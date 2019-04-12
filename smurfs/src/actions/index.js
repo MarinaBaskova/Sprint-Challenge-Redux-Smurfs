@@ -9,6 +9,8 @@ export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
 export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE';
 export const ADDING_SMURF = 'ADDING_SMURF';
 export const ADD_SUCCESS = 'ADD_SUCCESS';
+export const DELETING_SMURF = 'DELETING_SMURF';
+export const DELETE_SMURF = 'DELETE_SMURF';
 
 /*
   For this project you'll need at least 2 action creators for the main portion,
@@ -28,7 +30,6 @@ export const getSmurfs = () => {
 		axios
 			.get('http://localhost:3333/smurfs/')
 			.then((res) => {
-				console.log('SERVER RES IS', res);
 				dispatch({ type: FETCH_DATA_SUCCESS, payload: res.data });
 			})
 			.catch((err) => {
@@ -38,14 +39,28 @@ export const getSmurfs = () => {
 };
 
 export const addSmurfs = (newSmurf) => {
-	console.log('ACTION NEWSMURF', newSmurf);
 	return function(dispatch) {
 		dispatch({ type: ADDING_SMURF });
 		axios
 			.post('http://localhost:3333/smurfs/', newSmurf)
 			.then((res) => {
-				console.log('SERVER RES IS', res);
 				dispatch({ type: ADD_SUCCESS, payload: res.data });
+			})
+			.catch((err) => {
+				dispatch({ type: FETCH_DATA_FAILURE, payload: err });
+			});
+	};
+};
+
+export const deleteSmurf = (id) => {
+	console.log('DELETE', id);
+	return function(dispatch) {
+		dispatch({ type: DELETING_SMURF });
+		axios
+			.delete(`http://localhost:3333/smurfs/${id}`)
+			.then((res) => {
+				console.log('SERVER RES IS', res);
+				dispatch({ type: DELETE_SMURF, payload: res.data });
 			})
 			.catch((err) => {
 				dispatch({ type: FETCH_DATA_FAILURE, payload: err });
