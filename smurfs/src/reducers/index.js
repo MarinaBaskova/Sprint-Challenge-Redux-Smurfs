@@ -69,7 +69,7 @@ const reducer = (state = initialState, action) => {
 		case ADD_SUCCESS:
 			return {
 				...state,
-				smurfs: [ ...state.smurfs, ...action.payload ]
+				smurfs: [ ...action.payload ]
 			};
 		case DELETING_SMURF:
 			return {
@@ -80,7 +80,7 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				deletingSmurf: false,
-				smurfs: action.payload
+				smurfs: [ ...action.payload ]
 			};
 
 		default:

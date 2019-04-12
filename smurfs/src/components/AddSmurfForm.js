@@ -34,6 +34,7 @@ class AddSmurfForm extends Component {
 	};
 
 	render() {
+		console.log('ADD FORM', this.props);
 		return (
 			<div className="SmurfForm">
 				<form onSubmit={this.addNewSmurf}>
