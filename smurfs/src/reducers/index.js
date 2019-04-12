@@ -61,15 +61,7 @@ const reducer = (state = initialState, action) => {
 		case ADD_SUCCESS:
 			return {
 				...state,
-				smurf: [
-					...state.smurfs,
-					{
-						id: Date.now(),
-						name: action.payload,
-						age: action.payload,
-						height: action.payload
-					}
-				]
+				smurfs: [ ...state.smurfs, ...action.payload ]
 			};
 		default:
 			return state;

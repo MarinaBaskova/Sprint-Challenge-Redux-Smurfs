@@ -37,11 +37,12 @@ export const getSmurfs = () => {
 	};
 };
 
-export const addSmurfs = (smufrObj) => {
+export const addSmurfs = (newSmurf) => {
+	console.log('ACTION NEWSMURF', newSmurf);
 	return function(dispatch) {
 		dispatch({ type: ADDING_SMURF });
 		axios
-			.get('http://localhost:3333/smurfs/', smufrObj)
+			.post('http://localhost:3333/smurfs/', newSmurf)
 			.then((res) => {
 				console.log('SERVER RES IS', res);
 				dispatch({ type: ADD_SUCCESS, payload: res.data });
